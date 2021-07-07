@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Toast.makeText(this, "Отслеживание переключения: " + (isChecked ? "on" : "off"),
-                Toast.LENGTH_SHORT).show();
+                Toast.LENGTH_SHORT).show() ;
 
 
     }
