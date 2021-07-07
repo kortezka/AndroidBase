@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/allan"
         android:shadowColor="#000000"
-        android:shadowDx="6"
+        android:shadowDx="5"
         android:shadowDy="5"
         android:shadowRadius="3"
         android:text="fashion bro"
