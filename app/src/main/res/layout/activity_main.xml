@@ -1,96 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<TableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/allan"
-        android:text="Я текст"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="я текст младший"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/text3"
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/allan"
-        android:shadowColor="#000000"
-        android:shadowDx="4"
-        android:shadowDy="5"
-        android:shadowRadius="3"
-        android:text="fashion bro"
-        android:textColor="@color/purple_500"
-        android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent" >
 
-    <Switch
-        android:id="@+id/switch1"
+        <TextView
+            android:id="@+id/text_history"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_span="4"
+            android:textSize="40sp"
+            android:hint="history here" />
+    </TableRow>
+
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_weight="1"
-        android:text="щелк"
-        android:textColor="@color/teal_700" />
+        android:layout_height="match_parent" >
 
+        <TextView
+            android:id="@+id/text_equation"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_span="4"
+            android:hint="answer here"
+            android:textColor="@color/black"
 
-    <CalendarView
-        android:id="@+id/calendarView"
+            android:textSize="55sp"
+            android:textStyle="bold" />
+    </TableRow>
+    <TableRow
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        tools:visibility="visible" />
+        android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="анкета" />
+        <TextView
+            android:id="@+id/entering_numbers"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:textSize="50sp"
+            android:layout_span="4"
+            android:hint="new text here" />
+    </TableRow>
 
-    <RadioGroup
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#00FF73"
-            android:buttonTint="#F30000"
-            android:text="рубильник раз" />
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Рубильник два" />
+            android:text="1" />
 
-    </RadioGroup>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="2" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/button_multiplication"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="*" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/button_divide"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="/" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="9" />
+
+        <Button
+            android:id="@+id/button_addition"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="+" />
+    </TableRow>
+
+    <TableRow>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/button0"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/button_dot"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="." />
+
+        <Button
+            android:id="@+id/button_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="CE" />
+
+        <Button
+            android:id="@+id/button_subtraction"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:text="-" />
+    </TableRow>
+<TableRow>
+
+    <Button
+        android:id="@+id/button_equation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="="
+        android:layout_span="4"
+        />
+</TableRow>
+</TableLayout>
 
 
 
