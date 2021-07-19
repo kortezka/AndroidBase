@@ -16,10 +16,12 @@ public class MainActivity extends AppCompatActivity {
     char operation;
     Operation operat;
     Calculator calculator = new Calculator();
+
+
     public static final CharSequence ZERO = "ZERO";
-    public static final String HISTORY ="HISTORY";
-    public static final String NUMBERS ="NUMBERS";
-    public static final String RESULT ="RESULT";
+    public static final String HISTORY = "HISTORY";
+    public static final String NUMBERS = "NUMBERS";
+    public static final String RESULT = "RESULT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +62,15 @@ public class MainActivity extends AppCompatActivity {
         button0.setOnClickListener(v -> init(button0));
 
         buttonDot.setOnClickListener(v -> {
-            if(!(numbers.getText().charAt(numbers.length()-1)=='.')){
-                numbers.setText(numbers.getText()+".");
+            if (!(numbers.getText().charAt(numbers.length() - 1) == '.')) {
+                numbers.setText(numbers.getText() + ".");
             }
         });
 
-        buttonMultiplication.setOnClickListener(v -> operationButtonInit(buttonMultiplication,Operation.MULTIPLICATION));
-        buttonSubstraction.setOnClickListener(v -> operationButtonInit(buttonSubstraction,Operation.SUBTRACTION));
-        buttonAddition.setOnClickListener(v -> operationButtonInit(buttonAddition,Operation.ADDITION));
-        buttonDivide.setOnClickListener(v -> operationButtonInit(buttonDivide,Operation.DIVIDE));
+        buttonMultiplication.setOnClickListener(v -> operationButtonInit(buttonMultiplication, Operation.MULTIPLICATION));
+        buttonSubstraction.setOnClickListener(v -> operationButtonInit(buttonSubstraction, Operation.SUBTRACTION));
+        buttonAddition.setOnClickListener(v -> operationButtonInit(buttonAddition, Operation.ADDITION));
+        buttonDivide.setOnClickListener(v -> operationButtonInit(buttonDivide, Operation.DIVIDE));
         buttonClear.setOnClickListener(v -> {
             numbers.setText("");
             history.setText("");
@@ -86,17 +88,18 @@ public class MainActivity extends AppCompatActivity {
                     toast.show();
                 } else {
                     result.setText(calculator.equation(value1, value2, operat));
-                   history.setText(value1 + operat.getTitle() +  value2 + "=" + result.getText());
+                    history.setText(value1 + operat.getTitle() + value2 + "=" + result.getText());
                 }
             }
         });
 
     }
-    private void operationButtonInit(Button button,Operation operation) {
-        if(!(numbers.getText()=="")){
+
+    private void operationButtonInit(Button button, Operation operation) {
+        if (!(numbers.getText() == "")) {
             value1 = numbers.getText();
             history.setText(value1.toString() + button.getText());
-            operat=operation;
+            operat = operation;
             numbers.setText("");
         }
 
@@ -106,9 +109,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putCharSequence(HISTORY,history.getText());
+        outState.putCharSequence(HISTORY, history.getText());
         outState.putCharSequence(RESULT, result.getText());
-        outState.putCharSequence(NUMBERS,numbers.getText());
+        outState.putCharSequence(NUMBERS, numbers.getText());
     }
 
     @Override
@@ -118,7 +121,6 @@ public class MainActivity extends AppCompatActivity {
         result.setText(savedInstanceState.getCharSequence(RESULT));
         numbers.setText(savedInstanceState.getCharSequence(NUMBERS));
     }
-
 
 
     public void init(Button button) {
