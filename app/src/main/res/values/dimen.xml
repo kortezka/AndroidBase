@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <dimen name="textSize">20sp</dimen>
+    <dimen name="margin">1dp</dimen>
+    <dimen name="buttonHeight">70dp</dimen>
+    <dimen name="textHeight">60dp</dimen>
+</resources>

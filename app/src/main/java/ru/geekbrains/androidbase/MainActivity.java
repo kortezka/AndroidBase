@@ -1,19 +1,23 @@
 package ru.geekbrains.androidbase;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     TextView result;
     TextView numbers;
     TextView history;
     CharSequence value1;
     CharSequence value2;
-    char operation;
+    SwitchCompat themeswitch;
     Operation operat;
     Calculator calculator = new Calculator();
 
@@ -22,15 +26,20 @@ public class MainActivity extends AppCompatActivity {
     public static final String HISTORY = "HISTORY";
     public static final String NUMBERS = "NUMBERS";
     public static final String RESULT = "RESULT";
+    public static final String PREFS_KEY = "KEY";
+    public static final int THEME_DARK=0;
+    public static final int THEME_LIGHT=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        setTheme(prefsToStyle(prefsGet()));
         setContentView(R.layout.activity_main);
         numbers = findViewById(R.id.entering_numbers);
         result = findViewById(R.id.text_equation);
         history = findViewById(R.id.text_history);
-
+        themeswitch = findViewById(R.id.themeSwitch);
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
         Button button3 = findViewById(R.id.button3);
@@ -49,6 +58,9 @@ public class MainActivity extends AppCompatActivity {
         Button buttonDot = findViewById(R.id.button_dot);
         Button buttonClear = findViewById(R.id.button_clear);
         Button buttonEquation = findViewById(R.id.button_equation);
+Button buttonRecreate = findViewById(R.id.buttonRecreate);
+buttonRecreate.setOnClickListener(v -> recreate());
+
 
         button1.setOnClickListener(v -> init(button1));
         button2.setOnClickListener(v -> init(button2));
@@ -60,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
         button8.setOnClickListener(v -> init(button8));
         button9.setOnClickListener(v -> init(button9));
         button0.setOnClickListener(v -> init(button0));
+
+
 
         buttonDot.setOnClickListener(v -> {
             if (!(numbers.getText().charAt(numbers.length() - 1) == '.')) {
@@ -92,6 +106,44 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        if (!(themeswitch.isChecked())) {
+            themeswitch.setOnCheckedChangeListener(this);
+        }
+    }
+
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            prefsPut(THEME_DARK);
+        } else {
+            prefsPut(THEME_LIGHT);
+        }
+       recreate();
+
+
+    }
+
+    private void prefsPut(int code){
+        SharedPreferences preferences = getSharedPreferences(PREFS_KEY,MODE_PRIVATE);
+preferences.edit().putInt(PREFS_KEY,code).apply();
+
+    }
+
+    private int prefsGet(){
+        SharedPreferences preferences = getSharedPreferences(PREFS_KEY,MODE_PRIVATE);
+        return preferences.getInt(PREFS_KEY,THEME_LIGHT);
+
+    }
+
+    private int prefsToStyle(int pref){
+        switch (pref){
+            case THEME_DARK:
+
+                return R.style.Theme_Hw1;
+            default:
+                return R.style.designMan1;
+        }
 
     }
 
@@ -127,4 +179,9 @@ public class MainActivity extends AppCompatActivity {
 
         numbers.setText(numbers.getText() + "" + button.getText());
     }
+
 }
+
+
+
+
