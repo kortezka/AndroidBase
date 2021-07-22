@@ -3,6 +3,7 @@ package ru.geekbrains.androidbase;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.CompoundButton;
@@ -11,13 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends AppCompatActivity implements Constants {
     TextView result;
     TextView numbers;
     TextView history;
     CharSequence value1;
     CharSequence value2;
-    SwitchCompat themeswitch;
     Operation operat;
     Calculator calculator = new Calculator();
 
@@ -26,20 +26,22 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     public static final String HISTORY = "HISTORY";
     public static final String NUMBERS = "NUMBERS";
     public static final String RESULT = "RESULT";
+    public static final int THEME_DARK = 0;
+    public static final int REQUEST_CODE = 0;
+    public static final int THEME_LIGHT = 1;
     public static final String PREFS_KEY = "KEY";
-    public static final int THEME_DARK=0;
-    public static final int THEME_LIGHT=1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setTheme(prefsToStyle(prefsGet()));
+        setTheme(intentsToStyle(prefsGet()));
         setContentView(R.layout.activity_main);
         numbers = findViewById(R.id.entering_numbers);
         result = findViewById(R.id.text_equation);
         history = findViewById(R.id.text_history);
-        themeswitch = findViewById(R.id.themeSwitch);
+
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
         Button button3 = findViewById(R.id.button3);
@@ -58,9 +60,6 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         Button buttonDot = findViewById(R.id.button_dot);
         Button buttonClear = findViewById(R.id.button_clear);
         Button buttonEquation = findViewById(R.id.button_equation);
-Button buttonRecreate = findViewById(R.id.buttonRecreate);
-buttonRecreate.setOnClickListener(v -> recreate());
-
 
         button1.setOnClickListener(v -> init(button1));
         button2.setOnClickListener(v -> init(button2));
@@ -72,7 +71,6 @@ buttonRecreate.setOnClickListener(v -> recreate());
         button8.setOnClickListener(v -> init(button8));
         button9.setOnClickListener(v -> init(button9));
         button0.setOnClickListener(v -> init(button0));
-
 
 
         buttonDot.setOnClickListener(v -> {
@@ -106,45 +104,48 @@ buttonRecreate.setOnClickListener(v -> recreate());
                 }
             }
         });
-        if (!(themeswitch.isChecked())) {
-            themeswitch.setOnCheckedChangeListener(this);
-        }
+
+        Button buttonTheme = findViewById(R.id.button_theme);
+        buttonTheme.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, second_activity.class);
+            startActivityForResult(intent, REQUEST_CODE);
+        });
+
     }
 
+
+    private void prefsPut(int code) {
+        SharedPreferences preferences = getSharedPreferences(PREFS_KEY, MODE_PRIVATE);
+        preferences.edit().putInt(PREFS_KEY, code).apply();
+
+    }
+
+    private int prefsGet() {
+        SharedPreferences preferences = getSharedPreferences(PREFS_KEY, MODE_PRIVATE);
+        return preferences.getInt(PREFS_KEY, THEME_LIGHT);
+
+    }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked) {
-            prefsPut(THEME_DARK);
-        } else {
-            prefsPut(THEME_LIGHT);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode != REQUEST_CODE) {
+            super.onActivityResult(requestCode, resultCode, data);
+            return;
         }
-       recreate();
 
-
+        if (resultCode == RESULT_OK) {
+            prefsPut(data.getIntExtra(THEME_SETTINGS, 0));
+            recreate();
+        }
     }
 
-    private void prefsPut(int code){
-        SharedPreferences preferences = getSharedPreferences(PREFS_KEY,MODE_PRIVATE);
-preferences.edit().putInt(PREFS_KEY,code).apply();
-
-    }
-
-    private int prefsGet(){
-        SharedPreferences preferences = getSharedPreferences(PREFS_KEY,MODE_PRIVATE);
-        return preferences.getInt(PREFS_KEY,THEME_LIGHT);
-
-    }
-
-    private int prefsToStyle(int pref){
-        switch (pref){
+    private int intentsToStyle(int intent) {
+        switch (intent) {
             case THEME_DARK:
-
                 return R.style.Theme_Hw1;
             default:
                 return R.style.designMan1;
         }
-
     }
 
     private void operationButtonInit(Button button, Operation operation) {

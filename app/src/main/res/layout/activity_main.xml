@@ -182,30 +182,16 @@
             android:id="@+id/button_equation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_span="4"
+            android:layout_span="3"
             android:text="=" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/themeSwitch"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="день\\ночь"
-            android:layout_span="2"/>
-
-        <Button
-            android:id="@+id/buttonRecreate"
-            android:layout_width="@dimen/buttonHeight"
-            android:layout_height="wrap_content"
-            android:text="костыль"
-            android:textSize="15sp"
-            android:layout_span="2"/>
-
+            android:text="окрас" />
     </TableRow>
+
+
 </TableLayout>
 
 
